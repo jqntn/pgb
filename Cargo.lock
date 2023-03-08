@@ -3,5 +3,37 @@
 version = 3
 
 [[package]]
+name = "bitfrob"
+version = "0.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "fb18fff2e974c4b95a45f47398bb6ed5b040ccdaac9d41ed045d33dbe960f75f"
+
+[[package]]
+name = "bracer"
+version = "0.1.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6559b8c3065745016f5cc2d1095273fe8a175e953c976426947ad828d6ba6fda"
+
+[[package]]
+name = "gba"
+version = "0.10.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "094e70779ddf56f00829f0e9176b573192931e2745716228654e91ead8deb3a6"
+dependencies = [
+ "bitfrob",
+ "bracer",
+ "voladdress",
+]
+
+[[package]]
 name = "pgb"
 version = "0.1.0"
+dependencies = [
+ "gba",
+]
+
+[[package]]
+name = "voladdress"
+version = "1.2.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "dcd9db56aa8bbbd7c3b15e420313fbf4f0fff9738648486d21d5f2b097723e2b"
