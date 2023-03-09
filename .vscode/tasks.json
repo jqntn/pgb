@@ -2,6 +2,7 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
+			"label": "run",
 			"type": "cargo",
 			"command": "run",
 			"args": [
@@ -10,11 +11,60 @@
 			"problemMatcher": [
 				"$rustc"
 			],
-			"label": "rust: cargo run",
 			"group": {
 				"kind": "build",
 				"isDefault": true
-			}
-		}
-	]
+			},
+		},
+		{
+			"label": "build",
+			"type": "cargo",
+			"command": "build",
+			"args": [
+				"--release"
+			],
+			"problemMatcher": [
+				"$rustc"
+			],
+			"group": "build",
+		},
+		{
+			"label": "objcopy",
+			"type": "shell",
+			"command": "arm-none-eabi-objcopy",
+			"args": [
+				"-O",
+				"binary",
+				"target/thumbv4t-none-eabi/release/pgb",
+				"target/pgb.gba",
+			],
+		},
+		{
+			"label": "get gbafix",
+			"type": "cargo",
+			"command": "install",
+			"args": [
+				"gbafix"
+			],
+		},
+		{
+			"label": "gbafix",
+			"type": "shell",
+			"command": "gbafix",
+			"args": [
+				"-p",
+				"-tpgb",
+				"-cCJUE",
+				"-mJU",
+				"target/pgb.gba",
+			],
+			"group": "build",
+			"dependsOn": [
+				"build",
+				"objcopy",
+				"get gbafix",
+			],
+			"dependsOrder": "sequence",
+		},
+	],
 }
